@@ -18,9 +18,30 @@ from langchain.agents.agent_toolkits import (
     VectorStoreInfo
 )
 
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: black;
+    }
+    div[data-baseweb="input"] > div {
+        background-color: white;
+        color: black;
+    }
+    .stMarkdown {
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Colorful title
+st.markdown("""
+    <h1><span style='color: red;'>my</span><span style='color: yellow;'>Company</span><span style='color: pink;'>Brain🧠</span><span style='color: pink;'>Tank</span></h1>
+    """, unsafe_allow_html=True)
+
 # Set APIkey for OpenAI Service
-# Can sub this out for other LLM providers
-os.environ['OPENAI_API_KEY'] = ''
+with open("api_key.txt", "r") as file:
+    api_key = file.read().strip()
+os.environ['OPENAI_API_KEY'] = api_key
 
 # Create instance of OpenAI LLM
 llm = OpenAI(temperature=0.1, verbose=True)
@@ -48,9 +69,9 @@ agent_executor = create_vectorstore_agent(
     toolkit=toolkit,
     verbose=True
 )
-st.title('🦜🔗 RAG finace report')
+
 # Create a text input box for the user
-prompt = st.text_input('Input your prompt here')
+prompt = st.text_input('Input your request here')
 
 # If the user hits enter
 if prompt:
@@ -59,9 +80,9 @@ if prompt:
     # ...and write it out to the screen
     st.write(response)
 
-    # With a streamlit expander  
-    with st.expander('Document Similarity Search'):
-        # Find the relevant pages
-        search = store.similarity_search_with_score(prompt) 
-        # Write out the first 
-        st.write(search[0][0].page_content) 
+    # # With a streamlit expander  
+    # with st.expander('Document Similarity Search'):
+    #     # Find the relevant pages
+    #     search = store.similarity_search_with_score(prompt) 
+    #     # Write out the first 
+    #     st.write(search[0][0].page_content)
