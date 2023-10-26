@@ -6,6 +6,11 @@ from langchain.embeddings import OpenAIEmbeddings
 # Bring in streamlit for UI/app interface
 import streamlit as st
 
+# Read the markdown content from a file
+with open("styles.md", "r") as f:
+    markdown_content = f.read()
+st.markdown(markdown_content, unsafe_allow_html=True)
+
 # Import PDF document loaders...there's other ones as well!
 from langchain.document_loaders import PyPDFLoader
 # Import chroma as the vector store 
@@ -17,26 +22,6 @@ from langchain.agents.agent_toolkits import (
     VectorStoreToolkit,
     VectorStoreInfo
 )
-
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: black;
-    }
-    div[data-baseweb="input"] > div {
-        background-color: white;
-        color: black;
-    }
-    .stMarkdown {
-        color: white;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Colorful title
-st.markdown("""
-    <h1><span style='color: red;'>my</span><span style='color: yellow;'>Company</span><span style='color: pink;'>Brain🧠</span><span style='color: pink;'>Tank</span></h1>
-    """, unsafe_allow_html=True)
 
 # Set APIkey for OpenAI Service
 with open("api_key.txt", "r") as file:
@@ -79,10 +64,3 @@ if prompt:
     response = agent_executor.run(prompt)
     # ...and write it out to the screen
     st.write(response)
-
-    # # With a streamlit expander  
-    # with st.expander('Document Similarity Search'):
-    #     # Find the relevant pages
-    #     search = store.similarity_search_with_score(prompt) 
-    #     # Write out the first 
-    #     st.write(search[0][0].page_content)
