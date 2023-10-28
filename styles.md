@@ -14,4 +14,4 @@ div[data-baseweb="input"] input::placeholder {
 }
 </style>
 
-<h1><span style='color: red;'>my</span><span style='color: yellow;'>Company</span><span style='color: pink;'>Brain🧠</span><span style='color: pink;'>Tank</span></h1>
+<h1><span style='color: yellow;'>my</span><span style='color: yellow;'>Company</span><span style='color: pink;'>Brain🧠</span><span style='color: pink;'>Tank</span></h1>
